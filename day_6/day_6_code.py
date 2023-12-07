@@ -15,9 +15,10 @@ Part 1
     What is the product of these numbers?
 """
 import re
+import numpy as np
 
 file_path = "./day_6/"
-file_name = "day_6_test.txt"
+file_name = "day_6_input.txt"
 
 file_string = file_path + file_name
 
@@ -32,4 +33,20 @@ time_distance = list(zip(digit_patern.findall(times), digit_patern.findall(dista
 
 def calc_times(time_distance_tup):
     time, distance = time_distance_tup
-    
+    distance_list = [int(pressed_time) * (int(time) - int(pressed_time)) for pressed_time in range(int(time))]
+    distance_list = [dist for dist in distance_list if dist > int(distance)]
+    return len(distance_list)
+
+p = 1
+for pair in time_distance:
+    p = p * calc_times(pair)
+"""
+Part 2
+------
+    The nummbers from before are actually just one massive number
+    There must be a faster way of doing this but this works for now
+"""
+time = ''.join(digit_patern.findall(times))
+distance = "".join(digit_patern.findall(distances))
+
+print(calc_times((time, distance)))

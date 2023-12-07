@@ -24,11 +24,13 @@ def calc_score(line):
     winners = list(winners.split(" "))
     score = list(score.split(" "))
     score = [number for number in score if number != '']
-    total = 0
+    right = -1
     for number in score:
         if number in winners:
-            total = total * 2 + 1 if total != 0 else 1
-    return total
+            right += 1
+    if right == -1:
+        return 0
+    return 2 ** right
 
 def total_score(all_lines):
     return sum(calc_score(line) for line in all_lines)
