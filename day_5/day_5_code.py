@@ -4,7 +4,6 @@ Day 5 Code
 
 Part 1
 -------
-
     Find the lowest location number that corresponds to any of the initial seeds
     What is the lowest location number that corresponds to any of the initial seed numbers?
 """

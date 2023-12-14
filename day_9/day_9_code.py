@@ -34,8 +34,20 @@ def predict_next(sequence):
     lasts = [value[-1] for value in list(difference.values())][::-1]
     return(sum(lasts))
 
-# We can also do this by working out f(n) from the difference dictionary
+# We can also do this by working out f(n)
+# np has Polynomial.fit which will just give us the f(n)
+# From https://www.reddit.com/r/adventofcode/comments/18e5ytd/2023_day_9_solutions/
 
+from numpy.polynomial.polynomial import Polynomial
+import numpy as np
+
+answer = [0, 0]
+for line in lines:
+    y = [int(x) for x in line]
+    poly = Polynomial.fit(np.arange(len(y)), y, deg=len(y)-1)
+    answer[0] += round(poly(len(y)))
+    answer[1] += round(poly(-1))
+print("Part 1: {}\nPart 2: {}".format(*answer))
 
 """
 Part 2
@@ -51,7 +63,3 @@ def predict_first(sequence):
     for first in firsts[1:]:
         working_num = first - working_num
     return working_num
-
-        
-
-print(sum(predict_first(line) for line in lines))

@@ -22,7 +22,6 @@ from day_7_code import determine_kind, with_jokers
 def test_wins(cards, kind):
     assert kind == determine_kind(cards)
 
-
 """ Day 7 Part 2 """
 @pytest.mark.parametrize(
     "cards, kind",
